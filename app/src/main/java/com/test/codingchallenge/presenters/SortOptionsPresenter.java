@@ -1,6 +1,8 @@
 package com.test.codingchallenge.presenters;
 
+import com.test.codingchallenge.R;
 import com.test.codingchallenge.contracts.SortOptionsContract;
+import com.test.codingchallenge.util.Params;
 import com.test.codingchallenge.views.fragments.SortOptionsFragment;
 
 import java.lang.ref.WeakReference;
@@ -20,4 +22,26 @@ public class SortOptionsPresenter implements SortOptionsContract.Presenter {
         this.mView = new WeakReference<>(null);
     }
 
+    @Override
+    public void parseSortSelection(int viewId) {
+
+        String sortOption = null;
+        switch (viewId) {
+            case R.id.rb_sort_price_descending:
+                sortOption = Params.SORT_PRICE_DESCENDING;
+                break;
+            case R.id.rb_sort_price_ascending:
+                sortOption = Params.SORT_PRICE_ASCENDING;
+                break;
+            case R.id.rb_sort_beds_descending:
+                sortOption = Params.SORT_BED_DESCENDING;
+                break;
+            case R.id.rb_sort_beds_ascending:
+                sortOption = Params.SORT_BED_ASCENDING;
+                break;
+        }
+
+        if (mView.get() != null)
+            mView.get().showSortedList(sortOption);
+    }
 }

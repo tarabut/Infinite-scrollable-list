@@ -59,12 +59,16 @@ public class HomeActivity extends AppCompatActivity {
             removeFragment(mSortOptionsFragment);
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main_menu, menu);
-//        return true;
-//    }
+    @Override
+    public void onBackPressed() {
+
+        if (mSortOptionsFragment != null) {
+            moveToPropertyScreen("");
+            return;
+        }
+        super.onBackPressed();
+    }
+
 
     public void OnClickSortView(View view) {
 
@@ -101,6 +105,7 @@ public class HomeActivity extends AppCompatActivity {
         bundle.putString(Params.ORDER_BEHAVIOURS, sortOption);
         mPropertyFragment.setArguments(bundle);
         addFragment(R.id.frameLayout_home, mPropertyFragment);
+        tvSort.setText(getString(R.string.sort));
     }
 
     /**

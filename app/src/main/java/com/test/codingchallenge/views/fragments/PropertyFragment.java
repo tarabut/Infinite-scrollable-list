@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -45,6 +46,9 @@ public class PropertyFragment extends Fragment implements PropertyContract.View 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
+    @BindView(R.id.tv_sort_order)
+    TextView tvSortOrder;
+
     // Presenter of property fragment in MVP
     private PropertyPresenter mPresenter;
 
@@ -59,8 +63,6 @@ public class PropertyFragment extends Fragment implements PropertyContract.View 
     private String mSortOrder;
 
     public PropertyFragment() {
-        // initialize list before sending to adapter
-        mPropertyList = new ArrayList<>();
     }
 
     @Nullable
@@ -78,10 +80,21 @@ public class PropertyFragment extends Fragment implements PropertyContract.View 
         Bundle bundle = getArguments();
         if (bundle != null) {
             mSortOrder = bundle.getString(Params.ORDER_BEHAVIOURS);
+            if (mSortOrder != null && !mSortOrder.isEmpty()) {
+                String sortString = "Sorting order: " +
+                        (mSortOrder.contains("b")? "Beds" : "Price") + " " +
+                        (mSortOrder.contains("a")? "Ascending" : "Descending");
+
+                tvSortOrder.setText(sortString);
+                tvSortOrder.setVisibility(View.VISIBLE);
+            } else {
+                tvSortOrder.setVisibility(View.GONE);
+            }
         }
 
         // First call for list from start of screen
         mPresenter.getPropertyData(0, mSortOrder);
+        mIsLoading = false;
 
         setupRecyclerView();
 
@@ -108,8 +121,15 @@ public class PropertyFragment extends Fragment implements PropertyContract.View 
                 LinearLayoutManager.VERTICAL, false);
         rvProperties.setLayoutManager(mLayoutManager);
 
+        // initialize list before sending to adapter
+        if (mPropertyList == null)
+            mPropertyList = new ArrayList<>();
+        else
+            mPropertyList.clear();
+
         mPropertyAdapter = new PropertyAdapter(mPropertyList);
         rvProperties.setAdapter(mPropertyAdapter);
+        rvProperties.setItemAnimator(new DefaultItemAnimator());
 
         rvProperties.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -142,6 +162,7 @@ public class PropertyFragment extends Fragment implements PropertyContract.View 
         progressBar.setVisibility(View.GONE);
 
         this.mPropertyList.addAll(propertyResourceList);
+        mIsLoading = false;
 
         if (mPropertyList == null || mPropertyList.size() == 0) {
             tvNoItemLabel.setVisibility(View.VISIBLE);

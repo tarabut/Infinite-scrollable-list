@@ -41,15 +41,26 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.Proper
 
         PropertyResource holderItem = mPropertyList.get(position);
         if (holderItem != null) {
-            String text = String.valueOf(position + 1) + ". " + holderItem.getTitle();
-            viewHolder.tvPrice.setText(text);
 
-            viewHolder.tvDetails.setText(text);
+            StringBuilder priceString = new StringBuilder();
+            priceString.append(holderItem.getPrice())
+                    .append(" ")
+                    .append(holderItem.getPriceLabel());
+            viewHolder.tvPrice.setText(priceString);
+
+            StringBuilder detailString = new StringBuilder();
+            detailString.append(holderItem.getBedrooms())
+                    .append(" ").append("Bedrooms")
+                    .append(" ")
+                    .append(holderItem.getBathrooms())
+                    .append(" ").append("Bathrooms");
+            viewHolder.tvDetails.setText(detailString);
 
             Picasso.get()
                     .load(holderItem.getThumbnail())
                     .placeholder(android.R.drawable.ic_menu_gallery)
                     .error(android.R.drawable.ic_menu_report_image)
+                    .noFade()
                     .into(viewHolder.ivThumbnail);
         }
     }
