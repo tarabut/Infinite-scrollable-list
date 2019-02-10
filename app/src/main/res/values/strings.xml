@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Coding Challenge 201902092000</string>
+    <string name="error_msg_api_faiure">Seems like server is under maintenance. Failed to fetch data from server</string>
+    <string name="error_msg_data_faiure">Failed to get data at the moment</string>
+    <string name="error_msg_connectivity">Oops! There seems a problem with internet connectivity</string>
+    <string name="error_msg_generic">Can\'t reach the network.</string>
+    <string name="text_ok">Ok</string>
+</resources>
