@@ -5,6 +5,7 @@
     package="com.test.codingchallenge">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -27,6 +28,9 @@
 
         <activity
             android:name=".views.activities.HomeActivity"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="6a85b19b2ffcfb59781452c88abb6f039f1af27b" />
     </application>
 
 </manifest>

@@ -1,16 +1,19 @@
 package com.test.codingchallenge.views.activities;
 
+import android.content.IntentFilter;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
 import com.test.codingchallenge.R;
+import com.test.codingchallenge.receivers.NetworkChangeReceiver;
 import com.test.codingchallenge.util.Params;
+import com.test.codingchallenge.util.SnackBarUtil;
 import com.test.codingchallenge.views.fragments.PropertyFragment;
 import com.test.codingchallenge.views.fragments.SortOptionsFragment;
 
@@ -32,6 +35,10 @@ public class HomeActivity extends AppCompatActivity {
     private PropertyFragment mPropertyFragment;
     private SortOptionsFragment mSortOptionsFragment;
 
+    //to track internet connectivity
+    private NetworkChangeReceiver mNetworkChangeReceiver;
+    private Snackbar mSnakeBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +56,31 @@ public class HomeActivity extends AppCompatActivity {
         // Property fragment with default values
         mPropertyFragment = new PropertyFragment();
         addFragment(R.id.frameLayout_home, mPropertyFragment);
+
+        if (mNetworkChangeReceiver == null) {
+            mNetworkChangeReceiver = new NetworkChangeReceiver(new NetworkChangeReceiver.NetworkChangeListener() {
+                @Override
+                public void onNetworkChange(final boolean isNetworkAvailable) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (!isNetworkAvailable) {
+                                mSnakeBar = SnackBarUtil.showSnackBarAlert("Ok",
+                                        HomeActivity.this,
+                                        getString(R.string.error_msg_connectivity),
+                                        Snackbar.LENGTH_LONG, null, 0);
+                            } else {
+                                if (mSnakeBar != null)
+                                    mSnakeBar.dismiss();
+                            }
+                        }
+                    });
+                }
+            });
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(android.net.ConnectivityManager.CONNECTIVITY_ACTION);
+            registerReceiver(mNetworkChangeReceiver, filter);
+        }
     }
 
     @Override
@@ -57,6 +89,9 @@ public class HomeActivity extends AppCompatActivity {
 
         if (mSortOptionsFragment != null)
             removeFragment(mSortOptionsFragment);
+
+        if (mNetworkChangeReceiver != null)
+            unregisterReceiver(mNetworkChangeReceiver);
     }
 
     @Override

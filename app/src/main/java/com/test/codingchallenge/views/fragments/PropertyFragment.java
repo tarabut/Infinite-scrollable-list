@@ -174,8 +174,12 @@ public class PropertyFragment extends Fragment implements PropertyContract.View 
     @Override
     public void showError(int errorCode) {
 
+        // show error for user
+        SnackBarUtil.showSnackBarAlert(getContext(), getString(errorCode), null);
+
+        //reset states
+        mIsLoading = false;
         progressBar.setVisibility(View.GONE);
-        SnackBarUtil.ShowSnackBarAlert(getContext(), getString(errorCode), null);
     }
 
     @Override

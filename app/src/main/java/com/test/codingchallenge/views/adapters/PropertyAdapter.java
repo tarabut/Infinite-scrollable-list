@@ -62,6 +62,14 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.Proper
                     .error(android.R.drawable.ic_menu_report_image)
                     .noFade()
                     .into(viewHolder.ivThumbnail);
+
+            Picasso.get()
+                    .load(holderItem.getBroker().getAgentPhoto())
+                    .placeholder(android.R.drawable.ic_menu_myplaces)
+                    .resize(50, 50)
+                    .centerCrop()
+                    .noFade()
+                    .into(viewHolder.ivAgent);
         }
     }
 
@@ -86,6 +94,8 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.Proper
         TextView tvPrice;
         @BindView(R.id.tv_property_details)
         TextView tvDetails;
+        @BindView(R.id.iv_property_agent)
+        ImageView ivAgent;
 
         PropertyViewHolder(@NonNull View itemView) {
             super(itemView);

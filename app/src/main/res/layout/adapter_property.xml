@@ -46,5 +46,18 @@
             app:layout_constraintEnd_toEndOf="@+id/tv_property_price"
             app:layout_constraintStart_toStartOf="@+id/tv_property_price"
             app:layout_constraintTop_toBottomOf="@+id/tv_property_price" />
+
+        <com.test.codingchallenge.views.widgets.RoundImageView
+            android:id="@+id/iv_property_agent"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_property_details"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_property_thumbnail" />
+
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

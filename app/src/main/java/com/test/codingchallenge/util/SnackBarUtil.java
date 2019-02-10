@@ -12,30 +12,30 @@ import com.test.codingchallenge.R;
 
 public class SnackBarUtil {
 
-    public static void ShowSnackBarAlert(Context context, String message) {
+    public static void showSnackBarAlert(Context context, String message) {
 
-        ShowSnackBarAlert(context.getString(R.string.text_ok), context, message,
+        showSnackBarAlert(context.getString(R.string.text_ok), context, message,
                 Snackbar.LENGTH_LONG, null, ContextCompat.getColor(context, R.color.colorError));
     }
 
-    public static void ShowSnackBarAlert(Context context, String message,
+    public static void showSnackBarAlert(Context context, String message,
                                          final OnActionSelectedListener onActionSelectedListener) {
         if (context == null) {
             return;
         }
 
-        ShowSnackBarAlert(context.getString(R.string.text_ok), context, message,
+        showSnackBarAlert(context.getString(R.string.text_ok), context, message,
                 Snackbar.LENGTH_LONG, onActionSelectedListener, ContextCompat.getColor(context, R.color.colorError));
     }
 
-    public static void ShowSnackBarAlert(String positionButtonText, Context context, String message,
+    public static void showSnackBarAlert(String positionButtonText, Context context, String message,
                                          final OnActionSelectedListener onActionSelectedListener) {
 
-        ShowSnackBarAlert(positionButtonText, context, message,Snackbar.LENGTH_LONG,
+        showSnackBarAlert(positionButtonText, context, message,Snackbar.LENGTH_LONG,
                 onActionSelectedListener, ContextCompat.getColor(context, R.color.colorError));
     }
 
-    public static Snackbar ShowSnackBarAlert(String positionButtonText, Context context, String message,
+    public static Snackbar showSnackBarAlert(String positionButtonText, Context context, String message,
                                              int length, final OnActionSelectedListener onActionSelectedListener, int backgroundColor) {
         if (context == null) {
             return null;
