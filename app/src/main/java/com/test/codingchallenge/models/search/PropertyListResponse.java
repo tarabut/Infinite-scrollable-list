@@ -7,12 +7,12 @@ import java.util.List;
 /*
 * Data model for search response
 */
-public class SearchListResponse {
+public class PropertyListResponse {
 
     @SerializedName("total")
     private Integer total;
     @SerializedName("res")
-    private List<SearchResource> searchResource = null;
+    private List<PropertyResource> propertyResource = null;
 
     public Integer getTotal() {
         return total;
@@ -22,11 +22,11 @@ public class SearchListResponse {
         this.total = total;
     }
 
-    public List<SearchResource> getSearchResource() {
-        return searchResource;
+    public List<PropertyResource> getPropertyResource() {
+        return propertyResource;
     }
 
-    public void setSearchResource(List<SearchResource> searchResource) {
-        this.searchResource = searchResource;
+    public void setPropertyResource(List<PropertyResource> propertyResource) {
+        this.propertyResource = propertyResource;
     }
 }

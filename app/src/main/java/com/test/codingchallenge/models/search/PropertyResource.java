@@ -7,7 +7,7 @@ import java.util.List;
 /*
  * Data model for search response
  */
-public class SearchResource {
+public class PropertyResource {
 
     @SerializedName("id")
     private Integer id;

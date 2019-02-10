@@ -1,55 +1,141 @@
 package com.test.codingchallenge.views.activities;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
 
 import com.test.codingchallenge.R;
-import com.test.codingchallenge.contracts.HomeContract;
-import com.test.codingchallenge.models.search.SearchResource;
-import com.test.codingchallenge.presenters.HomePresenter;
-import com.test.codingchallenge.util.SnackBarUtil;
+import com.test.codingchallenge.util.Params;
+import com.test.codingchallenge.views.fragments.PropertyFragment;
+import com.test.codingchallenge.views.fragments.SortOptionsFragment;
 
-import java.util.List;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Main Screen with default view of search result
  */
-public class HomeActivity extends AppCompatActivity implements HomeContract.View {
+public class HomeActivity extends AppCompatActivity {
 
-    // Presenter of Home activity in MVP
-    private HomePresenter mPresenter;
+    // view binding
+    @BindView(R.id.home_toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.tv_toolbar_sort)
+    TextView tvSort;
+
+    // Data list fragment
+    private PropertyFragment mPropertyFragment;
+    private SortOptionsFragment mSortOptionsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        this.mPresenter = new HomePresenter(this);
+        // calling ButterKnife right after setting content view
+        // binding ButterKnife for views
+        ButterKnife.bind(this);
 
-        mPresenter.getSearchData();
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Property List");
+        }
+
+        // Property fragment with default values
+        mPropertyFragment = new PropertyFragment();
+        addFragment(R.id.frameLayout_home, mPropertyFragment);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
-        if (mPresenter != null)
-            mPresenter.onRelease();
+        if (mSortOptionsFragment != null)
+            removeFragment(mSortOptionsFragment);
     }
 
-    @Override
-    public void setSearchedData(List<SearchResource> searchResourceList) {
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main_menu, menu);
+//        return true;
+//    }
 
+    public void OnClickSortView(View view) {
+
+        if (mSortOptionsFragment != null) {
+            moveToPropertyScreen("");
+            return;
+        }
+
+        removeFragment(mPropertyFragment);
+
+        if (mSortOptionsFragment == null) {
+            mSortOptionsFragment = new SortOptionsFragment();
+            mSortOptionsFragment.setOnOptionSelectionListener(
+                    new SortOptionsFragment.OnOptionSelectionListener() {
+                        @Override
+                        public void onOptionSelected(String sortOption) {
+                            moveToPropertyScreen(sortOption);
+                        }
+                    }
+            );
+        }
+        addFragment(R.id.frameLayout_home, mSortOptionsFragment);
+
+        tvSort.setText(getString(R.string.reset));
     }
 
-    @Override
-    public void showError(int errorCode) {
-//        todo dismiss progress bar if any
-        SnackBarUtil.ShowSnackBarAlert(HomeActivity.this, getString(errorCode), null);
+    private void moveToPropertyScreen(String sortOption) {
+
+        removeFragment(mSortOptionsFragment);
+        mSortOptionsFragment = null;
+
+//        mPropertyFragment = new PropertyFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(Params.ORDER_BEHAVIOURS, sortOption);
+        mPropertyFragment.setArguments(bundle);
+        addFragment(R.id.frameLayout_home, mPropertyFragment);
     }
 
-    @Override
-    public void showProgress() {
+    /**
+     * Adds a {@link Fragment} to this activity's layout.
+     *
+     * @param containerViewId The container view to where add the fragment.
+     * @param fragment The fragment to be added.
+     */
+    protected void addFragment(int containerViewId, Fragment fragment) {
+        try {
+            final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.add(containerViewId, fragment);
+            fragmentTransaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    /*
+     * @param fragment The fragment to be removed.
+     */
+    protected void removeFragment(Fragment fragment) {
+        if (fragment != null) {
+            final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.remove(fragment);
+            try {
+                fragmentTransaction.commit();
+            } catch (Exception e) {
+                e.printStackTrace();
+                try {
+                    fragmentTransaction.commitAllowingStateLoss();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
     }
 }
