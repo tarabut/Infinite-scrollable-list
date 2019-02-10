@@ -1,6 +1,6 @@
 package com.test.codingchallenge.data.source.rest;
 
-import com.test.codingchallenge.models.search.SearchListResponse;
+import com.test.codingchallenge.models.search.PropertyListResponse;
 import com.test.codingchallenge.util.Urls;
 
 import java.util.Map;
@@ -15,8 +15,8 @@ import retrofit2.http.QueryMap;
  */
 public interface ApiInterface {
 
-    @GET(Urls.GET_SEARCHED_DATA)
+    @GET(Urls.GET_PROPERTY_SEARCHED_DATA)
     @Headers({"Content-Type: application/json"})
-    Call<SearchListResponse> getSearchedData(@QueryMap Map<String, String> options);
+    Call<PropertyListResponse> getPropertySearchedData(@QueryMap Map<String, String> options);
 
 }

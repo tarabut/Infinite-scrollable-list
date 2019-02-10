@@ -15,5 +15,5 @@ public class Urls {
 
     // App APIs Urls
 
-    public static final String GET_SEARCHED_DATA            = "mobileapi/search";
+    public static final String GET_PROPERTY_SEARCHED_DATA   = "mobileapi/search";
 }

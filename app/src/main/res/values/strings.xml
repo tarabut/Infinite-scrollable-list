@@ -5,4 +5,11 @@
     <string name="error_msg_connectivity">Oops! There seems a problem with internet connectivity</string>
     <string name="error_msg_generic">Can\'t reach the network.</string>
     <string name="text_ok">Ok</string>
+    <string name="no_item_found">No item found</string>
+    <string name="sort">Sort</string>
+    <string name="sort_price_descending">Price Descending</string>
+    <string name="sort_price_ascending">Price Ascending</string>
+    <string name="sort_beds_descending">Beds Descending</string>
+    <string name="sort_beds_ascending">Beds Ascending</string>
+    <string name="reset">Reset</string>
 </resources>
