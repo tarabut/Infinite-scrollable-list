@@ -41,16 +41,35 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.Proper
 
         PropertyResource holderItem = mPropertyList.get(position);
         if (holderItem != null) {
-            String text = String.valueOf(position + 1) + ". " + holderItem.getTitle();
-            viewHolder.tvPrice.setText(text);
 
-            viewHolder.tvDetails.setText(text);
+            StringBuilder priceString = new StringBuilder();
+            priceString.append(holderItem.getPrice())
+                    .append(" ")
+                    .append(holderItem.getPriceLabel());
+            viewHolder.tvPrice.setText(priceString);
+
+            StringBuilder detailString = new StringBuilder();
+            detailString.append(holderItem.getBedrooms())
+                    .append(" ").append("Bedrooms")
+                    .append(" ")
+                    .append(holderItem.getBathrooms())
+                    .append(" ").append("Bathrooms");
+            viewHolder.tvDetails.setText(detailString);
 
             Picasso.get()
                     .load(holderItem.getThumbnail())
                     .placeholder(android.R.drawable.ic_menu_gallery)
                     .error(android.R.drawable.ic_menu_report_image)
+                    .noFade()
                     .into(viewHolder.ivThumbnail);
+
+            Picasso.get()
+                    .load(holderItem.getBroker().getAgentPhoto())
+                    .placeholder(android.R.drawable.ic_menu_myplaces)
+                    .resize(50, 50)
+                    .centerCrop()
+                    .noFade()
+                    .into(viewHolder.ivAgent);
         }
     }
 
@@ -75,6 +94,8 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.Proper
         TextView tvPrice;
         @BindView(R.id.tv_property_details)
         TextView tvDetails;
+        @BindView(R.id.iv_property_agent)
+        ImageView ivAgent;
 
         PropertyViewHolder(@NonNull View itemView) {
             super(itemView);

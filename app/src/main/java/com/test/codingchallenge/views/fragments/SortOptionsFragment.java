@@ -22,7 +22,8 @@ import butterknife.Unbinder;
 /**
  * Created for Coding Challenge Project of PF.
  */
-public class SortOptionsFragment extends Fragment implements SortOptionsContract.View, CompoundButton.OnCheckedChangeListener {
+public class SortOptionsFragment extends Fragment
+        implements SortOptionsContract.View, CompoundButton.OnCheckedChangeListener {
 
     // to unbind ButterKnife on view destroy
     protected Unbinder mUnbinder = null;
@@ -78,28 +79,18 @@ public class SortOptionsFragment extends Fragment implements SortOptionsContract
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
-        String sortOption = null;
-        switch (compoundButton.getId()) {
-            case R.id.rb_sort_price_descending:
-                sortOption = Params.SORT_PRICE_DESCENDING;
-                break;
-            case R.id.rb_sort_price_ascending:
-                sortOption = Params.SORT_PRICE_ASCENDING;
-                break;
-            case R.id.rb_sort_beds_descending:
-                sortOption = Params.SORT_BED_DESCENDING;
-                break;
-            case R.id.rb_sort_beds_ascending:
-                sortOption = Params.SORT_BED_ASCENDING;
-                break;
-        }
-
-        if (mOnOptionSelectionListener != null)
-            mOnOptionSelectionListener.onOptionSelected(sortOption);
+        mPresenter.parseSortSelection(compoundButton.getId());
     }
 
     public void setOnOptionSelectionListener(OnOptionSelectionListener listener) {
         this.mOnOptionSelectionListener = listener;
+    }
+
+    @Override
+    public void showSortedList(String sortOption) {
+
+        if (mOnOptionSelectionListener != null)
+            mOnOptionSelectionListener.onOptionSelected(sortOption);
     }
 
     public interface OnOptionSelectionListener {

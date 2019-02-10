@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Data model for search response
  */
-class Broker {
+public class Broker {
 
     @SerializedName("id")
     private Integer id;

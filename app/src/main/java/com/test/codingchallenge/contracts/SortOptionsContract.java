@@ -6,8 +6,10 @@ package com.test.codingchallenge.contracts;
 public class SortOptionsContract {
 
     public interface View {
+        void showSortedList(String sortOption);
     }
 
     public interface Presenter {
+        void parseSortSelection(int viewId);
     }
 }
