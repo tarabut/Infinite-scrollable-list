@@ -1,4 +1,4 @@
-# CodingChallenge2019020920002
+# Infinite Scrollable List
 
 Infinite scrollable list of items fetched from Restful web service
 
