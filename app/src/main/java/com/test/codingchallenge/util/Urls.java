@@ -7,10 +7,10 @@ public class Urls {
 
     // in case different base url for testing and production environment
     // staging
-    public static final String BASE_URL_STAGING             = "https://www.propertyfinder.ae/";
+    public static final String BASE_URL_STAGING             = "https://www.stagingbaseurl.com/";
 
     // production
-    public static final String BASE_URL                     = "https://www.propertyfinder.ae/";
+    public static final String BASE_URL                     = "https://www.baseurl.com/";
 
 
     // App APIs Urls
