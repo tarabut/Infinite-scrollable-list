@@ -14,8 +14,8 @@ import com.test.codingchallenge.models.search.PropertyResource;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+//import butterknife.BindView;
+//import butterknife.ButterKnife;
 
 /**
  * Created for Coding Challenge Project of PF.
@@ -88,20 +88,20 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.Proper
 
     class PropertyViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.iv_property_thumbnail)
+//        @BindView(R.id.iv_property_thumbnail)
         ImageView ivThumbnail;
-        @BindView(R.id.tv_property_price)
+//        @BindView(R.id.tv_property_price)
         TextView tvPrice;
-        @BindView(R.id.tv_property_details)
+//        @BindView(R.id.tv_property_details)
         TextView tvDetails;
-        @BindView(R.id.iv_property_agent)
+//        @BindView(R.id.iv_property_agent)
         ImageView ivAgent;
 
         PropertyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            // ButterKnife data binding of adapter
-            ButterKnife.bind(this, itemView);
+//            // ButterKnife data binding of adapter
+//            ButterKnife.bind(this, itemView);
         }
     }
 }
