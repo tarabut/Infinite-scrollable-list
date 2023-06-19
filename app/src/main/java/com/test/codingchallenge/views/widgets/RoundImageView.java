@@ -13,7 +13,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
-public class RoundImageView extends android.support.v7.widget.AppCompatImageView {
+public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView {
 
     public RoundImageView(Context context) {
         super(context);

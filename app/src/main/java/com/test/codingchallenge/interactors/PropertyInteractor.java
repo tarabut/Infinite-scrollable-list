@@ -1,6 +1,6 @@
 package com.test.codingchallenge.interactors;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.test.codingchallenge.contracts.PropertyContract;
 import com.test.codingchallenge.data.source.rest.ApiClient;

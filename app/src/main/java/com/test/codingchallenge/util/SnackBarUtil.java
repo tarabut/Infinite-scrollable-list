@@ -2,8 +2,8 @@ package com.test.codingchallenge.util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -67,7 +67,7 @@ public class SnackBarUtil {
 
         //Get reference of snackbar textview
         TextView textView = snackbar.getView()
-                .findViewById(android.support.design.R.id.snackbar_text);
+                .findViewById(R.id.snackbar_text);
         textView.setMaxLines(10);
         snackbar.show();
 
