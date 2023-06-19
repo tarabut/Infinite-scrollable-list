@@ -17,8 +17,8 @@ import com.test.codingchallenge.util.SnackBarUtil;
 import com.test.codingchallenge.views.fragments.PropertyFragment;
 import com.test.codingchallenge.views.fragments.SortOptionsFragment;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+//import butterknife.BindView;
+//import butterknife.ButterKnife;
 
 /**
  * Main Screen with default view of search result
@@ -26,9 +26,9 @@ import butterknife.ButterKnife;
 public class HomeActivity extends AppCompatActivity {
 
     // view binding
-    @BindView(R.id.home_toolbar)
+//    @BindView(R.id.home_toolbar)
     Toolbar toolbar;
-    @BindView(R.id.tv_toolbar_sort)
+//    @BindView(R.id.tv_toolbar_sort)
     TextView tvSort;
 
     // Data list fragment
@@ -44,9 +44,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // calling ButterKnife right after setting content view
-        // binding ButterKnife for views
-        ButterKnife.bind(this);
+//        // calling ButterKnife right after setting content view
+//        // binding ButterKnife for views
+//        ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {

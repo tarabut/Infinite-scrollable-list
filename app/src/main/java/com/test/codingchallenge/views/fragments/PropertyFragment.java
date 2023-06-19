@@ -24,30 +24,30 @@ import com.test.codingchallenge.views.adapters.PropertyAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+//import butterknife.BindView;
+//import butterknife.ButterKnife;
+//import butterknife.Unbinder;
 
 /**
  * Created for Coding Challenge Project of PF.
  */
 public class PropertyFragment extends Fragment implements PropertyContract.View {
 
-    // to unbind ButterKnife on view destroy
-    protected Unbinder mUnbinder = null;
-
-    // view binding
-    @BindView(R.id.rv_properties)
-    RecyclerView rvProperties;
-
-    @BindView(R.id.tv_no_item_label)
-    TextView tvNoItemLabel;
-
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
-
-    @BindView(R.id.tv_sort_order)
-    TextView tvSortOrder;
+//    // to unbind ButterKnife on view destroy
+//    protected Unbinder mUnbinder = null;
+//
+//    // view binding
+//    @BindView(R.id.rv_properties)
+//    RecyclerView rvProperties;
+//
+//    @BindView(R.id.tv_no_item_label)
+//    TextView tvNoItemLabel;
+//
+//    @BindView(R.id.progressBar)
+//    ProgressBar progressBar;
+//
+//    @BindView(R.id.tv_sort_order)
+//    TextView tvSortOrder;
 
     // Presenter of property fragment in MVP
     private PropertyPresenter mPresenter;
@@ -71,8 +71,8 @@ public class PropertyFragment extends Fragment implements PropertyContract.View 
 
         View rootView = inflater.inflate(R.layout.fragment_property, container, false);
 
-        // ButterKnife data binding
-        mUnbinder = ButterKnife.bind(this, rootView);
+//        // ButterKnife data binding
+//        mUnbinder = ButterKnife.bind(this, rootView);
 
         // Initiate presenter right after view setup
         this.mPresenter = new PropertyPresenter(this);
@@ -85,10 +85,10 @@ public class PropertyFragment extends Fragment implements PropertyContract.View 
                         (mSortOrder.contains("b")? "Beds" : "Price") + " " +
                         (mSortOrder.contains("a")? "Ascending" : "Descending");
 
-                tvSortOrder.setText(sortString);
-                tvSortOrder.setVisibility(View.VISIBLE);
+//                tvSortOrder.setText(sortString);
+//                tvSortOrder.setVisibility(View.VISIBLE);
             } else {
-                tvSortOrder.setVisibility(View.GONE);
+//                tvSortOrder.setVisibility(View.GONE);
             }
         }
 
@@ -105,9 +105,9 @@ public class PropertyFragment extends Fragment implements PropertyContract.View 
     public void onDestroyView() {
         super.onDestroyView();
 
-        // Unbinding data view
-        if (mUnbinder != null)
-            mUnbinder.unbind();
+//        // Unbinding data view
+//        if (mUnbinder != null)
+//            mUnbinder.unbind();
 
         // releasing resources held by presenter
         if (mPresenter != null)
@@ -116,10 +116,10 @@ public class PropertyFragment extends Fragment implements PropertyContract.View 
 
     private void setupRecyclerView() {
 
-        // setup of recycler view
-        mLayoutManager = new LinearLayoutManager(rvProperties.getContext(),
-                LinearLayoutManager.VERTICAL, false);
-        rvProperties.setLayoutManager(mLayoutManager);
+//        // setup of recycler view
+//        mLayoutManager = new LinearLayoutManager(rvProperties.getContext(),
+//                LinearLayoutManager.VERTICAL, false);
+//        rvProperties.setLayoutManager(mLayoutManager);
 
         // initialize list before sending to adapter
         if (mPropertyList == null)
@@ -128,44 +128,44 @@ public class PropertyFragment extends Fragment implements PropertyContract.View 
             mPropertyList.clear();
 
         mPropertyAdapter = new PropertyAdapter(mPropertyList);
-        rvProperties.setAdapter(mPropertyAdapter);
-        rvProperties.setItemAnimator(new DefaultItemAnimator());
-
-        rvProperties.addOnScrollListener(new RecyclerView.OnScrollListener() {
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                if (dy > 0) {
-                    int firstVisibleItemIndex, visibleItemCount, totalItemCount;
-                    firstVisibleItemIndex = mLayoutManager.findFirstVisibleItemPosition();
-                    visibleItemCount = mLayoutManager.getChildCount();
-                    totalItemCount = mLayoutManager.getItemCount();
-
-                    if (!mIsLoading) {
-                        // next page data fetched when last 5 items remaining to show
-                        if ((totalItemCount - firstVisibleItemIndex) <= (visibleItemCount * 5)) {
-                            mIsLoading = true;
-                            //Pagination: fetch new data
-                            mPresenter.getPropertyData(totalItemCount, mSortOrder);
-                        }
-                    }
-                }
-            }
-        });
+//        rvProperties.setAdapter(mPropertyAdapter);
+//        rvProperties.setItemAnimator(new DefaultItemAnimator());
+//
+//        rvProperties.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//
+//            @Override
+//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//
+//                if (dy > 0) {
+//                    int firstVisibleItemIndex, visibleItemCount, totalItemCount;
+//                    firstVisibleItemIndex = mLayoutManager.findFirstVisibleItemPosition();
+//                    visibleItemCount = mLayoutManager.getChildCount();
+//                    totalItemCount = mLayoutManager.getItemCount();
+//
+//                    if (!mIsLoading) {
+//                        // next page data fetched when last 5 items remaining to show
+//                        if ((totalItemCount - firstVisibleItemIndex) <= (visibleItemCount * 5)) {
+//                            mIsLoading = true;
+//                            //Pagination: fetch new data
+//                            mPresenter.getPropertyData(totalItemCount, mSortOrder);
+//                        }
+//                    }
+//                }
+//            }
+//        });
     }
 
     @Override
     public void setSearchedData(List<PropertyResource> propertyResourceList) {
 
-        progressBar.setVisibility(View.GONE);
+//        progressBar.setVisibility(View.GONE);
 
         this.mPropertyList.addAll(propertyResourceList);
         mIsLoading = false;
 
         if (mPropertyList == null || mPropertyList.size() == 0) {
-            tvNoItemLabel.setVisibility(View.VISIBLE);
+//            tvNoItemLabel.setVisibility(View.VISIBLE);
         } else {
             mPropertyAdapter.appendPropertyList(propertyResourceList);
         }
@@ -179,11 +179,11 @@ public class PropertyFragment extends Fragment implements PropertyContract.View 
 
         //reset states
         mIsLoading = false;
-        progressBar.setVisibility(View.GONE);
+//        progressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void showProgress() {
-        progressBar.setVisibility(View.VISIBLE);
+//        progressBar.setVisibility(View.VISIBLE);
     }
 }

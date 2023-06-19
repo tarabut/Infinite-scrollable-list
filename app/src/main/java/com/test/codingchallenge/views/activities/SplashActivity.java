@@ -10,8 +10,8 @@ import android.view.animation.Animation;
 import com.crashlytics.android.Crashlytics;
 import com.test.codingchallenge.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+//import butterknife.BindView;
+//import butterknife.ButterKnife;
 import io.fabric.sdk.android.Fabric;
 
 /*
@@ -21,7 +21,7 @@ import io.fabric.sdk.android.Fabric;
 */
 public class SplashActivity extends AppCompatActivity {
 
-    @BindView(R.id.iv_splash_logo)
+//    @BindView(R.id.iv_splash_logo)
     View viewSplash;
 
     @Override
@@ -30,9 +30,9 @@ public class SplashActivity extends AppCompatActivity {
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_splash);
 
-        // calling ButterKnife right after setting content view
-        // binding ButterKnife for views
-        ButterKnife.bind(this);
+//        // calling ButterKnife right after setting content view
+//        // binding ButterKnife for views
+//        ButterKnife.bind(this);
 
         // small animation
         startInitialAnimation();
