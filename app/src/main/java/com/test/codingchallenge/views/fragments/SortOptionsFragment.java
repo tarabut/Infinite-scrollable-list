@@ -15,9 +15,9 @@ import com.test.codingchallenge.contracts.SortOptionsContract;
 import com.test.codingchallenge.presenters.SortOptionsPresenter;
 import com.test.codingchallenge.util.Params;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+//import butterknife.BindView;
+//import butterknife.ButterKnife;
+//import butterknife.Unbinder;
 
 /**
  * Created for Coding Challenge Project of PF.
@@ -25,21 +25,21 @@ import butterknife.Unbinder;
 public class SortOptionsFragment extends Fragment
         implements SortOptionsContract.View, CompoundButton.OnCheckedChangeListener {
 
-    // to unbind ButterKnife on view destroy
-    protected Unbinder mUnbinder = null;
+//    // to unbind ButterKnife on view destroy
+//    protected Unbinder mUnbinder = null;
 
     // Presenter of property fragment in MVP
     private SortOptionsPresenter mPresenter;
 
-    // view binding
-    @BindView(R.id.rb_sort_price_descending)
-    RadioButton rbPriceDescending;
-    @BindView(R.id.rb_sort_price_ascending)
-    RadioButton rbPriceAscending;
-    @BindView(R.id.rb_sort_beds_descending)
-    RadioButton rbBedsDescending;
-    @BindView(R.id.rb_sort_beds_ascending)
-    RadioButton rbBedsAscending;
+//    // view binding
+//    @BindView(R.id.rb_sort_price_descending)
+//    RadioButton rbPriceDescending;
+//    @BindView(R.id.rb_sort_price_ascending)
+//    RadioButton rbPriceAscending;
+//    @BindView(R.id.rb_sort_beds_descending)
+//    RadioButton rbBedsDescending;
+//    @BindView(R.id.rb_sort_beds_ascending)
+//    RadioButton rbBedsAscending;
 
     private OnOptionSelectionListener mOnOptionSelectionListener;
 
@@ -49,16 +49,16 @@ public class SortOptionsFragment extends Fragment
 
         View rootView = inflater.inflate(R.layout.fragment_sort_options, container, false);
 
-        // ButterKnife data binding
-        mUnbinder = ButterKnife.bind(this, rootView);
+//        // ButterKnife data binding
+//        mUnbinder = ButterKnife.bind(this, rootView);
 
         // Initiate presenter right after view setup
         this.mPresenter = new SortOptionsPresenter(this);
 
-        rbPriceDescending.setOnCheckedChangeListener(this);
-        rbPriceAscending.setOnCheckedChangeListener(this);
-        rbBedsDescending.setOnCheckedChangeListener(this);
-        rbBedsAscending.setOnCheckedChangeListener(this);
+//        rbPriceDescending.setOnCheckedChangeListener(this);
+//        rbPriceAscending.setOnCheckedChangeListener(this);
+//        rbBedsDescending.setOnCheckedChangeListener(this);
+//        rbBedsAscending.setOnCheckedChangeListener(this);
 
         return rootView;
     }
@@ -67,9 +67,9 @@ public class SortOptionsFragment extends Fragment
     public void onDestroyView() {
         super.onDestroyView();
 
-        // Unbinding data view
-        if (mUnbinder != null)
-            mUnbinder.unbind();
+//        // Unbinding data view
+//        if (mUnbinder != null)
+//            mUnbinder.unbind();
 
         // releasing resources held by presenter
         if (mPresenter != null)
